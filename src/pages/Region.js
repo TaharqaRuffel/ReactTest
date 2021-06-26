@@ -1,75 +1,63 @@
+import React, { useState } from "react";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import Navigation from "../components/Navigation";
 
-const Region = () => {
-  const [regions, setRegions] = useState([]);
-  const [nomRegion, setNomRegion] = useState("");
+const Region = ({ region, update }) => {
   const [isEditing, setIsEditing] = useState(false);
+  const [editRegion, setEditRegion] = useState("");
 
-  useEffect(() => {
-    getRegions();
-  }, []);
+  //////////PUT\\\\\\\\\\\\
+  const handleEdit = () => {
+    const newData = {
+      id: region.id,
+      nom: editRegion ? editRegion : region.nom,
+    };
 
-  const getRegions = () => {
-    axios
-      .get("http://localhost:8080/regions")
-      .then((res) => setRegions(res.data));
+    axios.put("http://localhost:8080/regions", newData).then(() => {
+      setIsEditing(false);
+      update(true);
+    });
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   axios
-  //     .post("http://localhost:8080/regions", {
-  //       nom: nomRegion,
-  //     })
-  //     .then(() => {
-  //       setNomRegion("");
-  //       getRegions();
-  //     });
-  // };
+  //////////DELETE\\\\\\\\\\\\
+  const handleDelete = () => {
+    const idRegion = region.id;
 
-  // const handleModify = () => {
-  //   console.log("dans la méthode");
-  // };
+    axios.delete("http://localhost:8080/regions/" + idRegion).then(() => {
+      update(true);
+    });
+  };
 
   return (
-    <div class="container">
-      <Navigation />
-      <h1>REGIONS</h1>
-      <div>
-        {regions.map((region) => {
-          return (
-            <div class="row" key={region.id}>
-              <div class="col-3">
-                {isEditing ? (
-                  <input type="text" placeholder={region.nom} />
-                ) : (
-                  <p>{region.nom}</p>
-                )}
-              </div>
-              <div class="col-3">
-                <button
-                  onClick={setIsEditing(true)}
-                  class="btn btn-warning me-3 mb-3"
-                >
-                  Modifier
-                </button>
-                <button class="btn btn-danger">Supprimer</button>
-              </div>
-            </div>
-          );
-        })}
+    <div class="row" key={region.id}>
+      <div class="col-3">
+        {isEditing ? (
+          <input
+            type="text"
+            onChange={(e) => setEditRegion(e.target.value)}
+            defaultValue={region.nom}
+          />
+        ) : (
+          <span>{region.nom}</span>
+        )}
       </div>
+      <div class="col-3 mb-3">
+        {isEditing ? (
+          <button class="btn btn-success me-3" onClick={handleEdit}>
+            Valider
+          </button>
+        ) : (
+          <button
+            onClick={() => setIsEditing(true)}
+            class="btn btn-warning  me-3"
+          >
+            Modifier
+          </button>
+        )}
 
-      {/* <form onSubmit={(e) => handleSubmit(e)}>
-        <input
-          type="text"
-          placeholder="Ajouter une région"
-          onChange={(e) => setNomRegion(e.target.value)}
-        />
-        <button type="submit">Valider</button>
-      </form> */}
+        <button onClick={handleDelete} class="btn btn-danger">
+          Supprimer
+        </button>
+      </div>
     </div>
   );
 };
