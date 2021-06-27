@@ -28,13 +28,12 @@ const Region = ({region, update}) => {
         });
     };
 
-
     return (
         <div>
             <hr/>
             <Form as={Row} className="mt-2">
                 <input type="hidden" name="regionId" id="regionId"
-                       value="{{region.id}}"
+                       value={region.id}
                 />
                 <Col className="d-flex">
                     {isEditing ? (
