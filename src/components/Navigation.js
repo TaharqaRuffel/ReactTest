@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Form, FormControl, Nav, Navbar, NavDropdown} from "react-bootstrap";
+import {Nav, Navbar} from "react-bootstrap";
 
 
 const Navigation = () => {
@@ -14,7 +14,7 @@ const Navigation = () => {
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
                     <Nav.Link href="/">Accueil</Nav.Link>
-                    <Nav.Link href="/bouteilles" >Liste des bouteille</Nav.Link>
+                    <Nav.Link href="/bouteilles" >Liste des bouteilles</Nav.Link>
                     <Nav.Link href="/bouteille/ajouter" >Ajouter bouteille</Nav.Link>
                     <Nav.Link href="/couleurs" >Couleurs</Nav.Link>
                     <Nav.Link href="/regions" >Régions</Nav.Link>
