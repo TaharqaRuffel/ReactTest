@@ -1,19 +1,28 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import {Button, Form, FormControl, Nav, Navbar, NavDropdown} from "react-bootstrap";
+
 
 const Navigation = () => {
     return (
-        <div className="navigation">
-            <NavLink exact to="/" activeClassName="nav-active">
-                Accueil
-            </NavLink>
-            <NavLink exact to="/couleurs" activeClassName="nav-active">
-                Couleurs
-            </NavLink>
-            <NavLink exact to="/regions" activeClassName="nav-active">
-                Régions
-            </NavLink>
-        </div>
+    <nav>
+        <Navbar bg="light" expand="lg">
+            <a href="/" className="navbar-brand active">
+                <img className="bottle" src={process.env.PUBLIC_URL + '/img/Bottle32x32.png'} alt="bouteille"/>
+                <img className="bottle" src={process.env.PUBLIC_URL + '/img/Bottle32x32.png'} alt="bouteille"/>
+            </a>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="mr-auto">
+                    <Nav.Link href="/">Accueil</Nav.Link>
+                    <Nav.Link href="/bouteilles" >Liste des bouteille</Nav.Link>
+                    <Nav.Link href="/bouteille/ajouter" >Ajouter bouteille</Nav.Link>
+                    <Nav.Link href="/couleurs" >Couleurs</Nav.Link>
+                    <Nav.Link href="/regions" >Régions</Nav.Link>
+                </Nav>
+            </Navbar.Collapse>
+        </Navbar>
+    </nav>
     );
 };
 
