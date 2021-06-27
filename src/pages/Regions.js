@@ -21,18 +21,15 @@ const Regions = () => {
             .then((res) => setRegions(res.data));
     };
 
-  return (
-    <div class="container">
-      <Navigation />
-      <h1>REGIONS</h1>
-      <div>
-        {regions.map((region) => {
-          return <Region region={region} update={setIsUpdate} />;
-        })}
-        <RegionAdd update={setIsUpdate} />
-      </div>
-    </div>
-  );
+    return (
+        <div>
+            <h2>Région des vins : </h2>
+            {regions.map((region) => {
+                return <Region region={region} update={setIsUpdate} key={region.id}/>;
+            })}
+            <hr/>
+            <RegionAdd update={setIsUpdate} hasCancel={false}/>
+        </div>
+    );
 };
-
 export default Regions;
