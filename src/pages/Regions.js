@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, {useEffect, useState} from "react";
-import RegionAdd from "./RegionAdd";
-import Region from "./Region";
+import RegionAdd from "../components/RegionAdd";
+import Region from "../components/Region";
 
 const Regions = () => {
     const [regions, setRegions] = useState([]);

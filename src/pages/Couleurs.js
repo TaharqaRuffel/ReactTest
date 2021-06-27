@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
-import Couleur from "./Couleur";
-import CouleurAdd from "./CouleurAdd";
+import Couleur from "../components/Couleur";
+import CouleurAdd from "../components/CouleurAdd";
 
 const Couleurs = () => {
     const [couleurs, setCouleurs] = useState([]);
