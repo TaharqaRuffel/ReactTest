@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import axios from "axios";
+import {Button, Col, Form, Row} from "react-bootstrap";
 
 const Region = ({region, update}) => {
     const [isEditing, setIsEditing] = useState(false);
@@ -31,37 +32,34 @@ const Region = ({region, update}) => {
     return (
         <div>
             <hr/>
-            <div className="row">
-                <div className="col-3">
+            <Form as={Row} className="mt-2">
+                <input type="hidden" name="regionId" id="regionId"
+                       value="{{region.id}}"
+                />
+                <Col className="d-flex">
                     {isEditing ? (
-                        <input
-                            type="text"
+                        <Form.Control
+                            className="w-100"
+                            type="text" name="regionNom" id="regionNom"
                             onChange={(e) => setEditRegion(e.target.value)}
-                            defaultValue={region.nom}
-                        />
+                            defaultValue={region.nom}/>
                     ) : (
                         <span>{region.nom}</span>
                     )}
-                </div>
-                <div className="col-3 mb-3">
+                </Col>
+                <Col className="d-flex justify-content-center">
                     {isEditing ? (
                         <button className="btn btn-success me-3" onClick={handleEdit}>
                             Valider
                         </button>
                     ) : (
-                        <button
-                            onClick={() => setIsEditing(true)}
-                            className="btn btn-warning  me-3"
-                        >
-                            Modifier
-                        </button>
+                        <Button variant="primary" type="button" className="ms-2" onClick={() => setIsEditing(true)}>
+                            modifier
+                        </Button>
                     )}
-
-                    <button onClick={handleDelete} className="btn btn-danger">
-                        Supprimer
-                    </button>
-                </div>
-            </div>
+                    <Button variant="danger" onClick={handleDelete} type="button" className="ms-2">supprimer</Button>
+                </Col>
+            </Form>
         </div>
     );
 };
